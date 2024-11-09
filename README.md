@@ -71,3 +71,12 @@ Amacımız: Bizim entity'lerimizden nesne oluşturmak yerine yani onları new'le
 Tek bir property’ye sahip bir DTO bile olsa, validasyon ve yetkilendirme gibi süreçlerde anlamlı bir adlandırmaya sahip bir DTO ile daha güvenli ve sağlam bir yapı oluşturabilirsiniz. Örneğin, tek bir userId özelliğine sahip bir DeleteUserDto sınıfı, gelen veriyi daha rahat kontrol etmenizi sağlar.
 
 Eğer projeniz küçük ve basit bir yapıya sahipse, tek bir özellik için ayrı bir DTO oluşturmak gereksiz olabilir. Ancak, daha karmaşık bir yapı ya da uzun vadeli büyüme hedefliyorsanız, bu DTO’yu oluşturmak ileride işleri daha düzenli ve kolay yönetilebilir hale getirebilir.
+
+
+Auto mapper hakkında:
+Alttaki gibi bir mapping'e ihtiyaç duymuyoruz.
+![image](https://github.com/user-attachments/assets/882b9f93-5719-403a-89d7-c80ce384ccc0)
+
+
+
+
