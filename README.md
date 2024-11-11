@@ -71,3 +71,48 @@ Amacımız: Bizim entity'lerimizden nesne oluşturmak yerine yani onları new'le
 Tek bir property’ye sahip bir DTO bile olsa, validasyon ve yetkilendirme gibi süreçlerde anlamlı bir adlandırmaya sahip bir DTO ile daha güvenli ve sağlam bir yapı oluşturabilirsiniz. Örneğin, tek bir userId özelliğine sahip bir DeleteUserDto sınıfı, gelen veriyi daha rahat kontrol etmenizi sağlar.
 
 Eğer projeniz küçük ve basit bir yapıya sahipse, tek bir özellik için ayrı bir DTO oluşturmak gereksiz olabilir. Ancak, daha karmaşık bir yapı ya da uzun vadeli büyüme hedefliyorsanız, bu DTO’yu oluşturmak ileride işleri daha düzenli ve kolay yönetilebilir hale getirebilir.
+
+
+Auto mapper hakkında:
+Alttaki gibi bir mapping'e ihtiyaç duymuyoruz.
+![image](https://github.com/user-attachments/assets/882b9f93-5719-403a-89d7-c80ce384ccc0)
+
+
+
+Controller içerisinde readonly ve ctro ile Dependency Injection uygulanması:
+
+Burada alttaki kodu neden kullandık sorusuna yanıt buldum. 
+
+
+
+Bu kodda readonly alan ve constructor'da (ctor) yapılan atama, bağımlılık enjeksiyonu (Dependency Injection, DI) ile ilgili bir yapıdır. İşte bu kullanımın detayları:
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CategoriesController : ControllerBase
+    {
+        private readonly ICategoryService _categoryService;
+
+        public CategoriesController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
+    }
+
+1. readonly Anahtar Kelimesi
+readonly ile işaretlenmiş alanlar yalnızca sınıf oluşturulurken (yani constructor içinde) veya tanımlandıkları anda değer alabilirler.
+readonly olarak tanımlanmış bir alan, sınıfın diğer metotlarında değiştirilemez. Bu özellik, değiştirilemez (immutable) veri yapılarında istikrar sağlar ve alanın yanlışlıkla değiştirilmesini engeller.
+2. Dependency Injection ve Constructor Ataması
+ICategoryService gibi bir bağımlılığı readonly bir alan olarak tanımlamak, bu bağımlılığın sınıfın yaşam döngüsü boyunca değiştirilememesini sağlar.
+CategoriesController sınıfı, ICategoryService bağımlılığını kendisi oluşturmamaktadır; bunun yerine bu bağımlılık dışarıdan, yani DI çerçevesi tarafından sağlanır.
+Constructor, DI çerçevesi tarafından sağlanan bu bağımlılığı alıp _categoryService alanına atar. Bu sayede sınıf, ICategoryService bağımlılığını doğru bir şekilde alır ve kullanır.
+Neden Böyle Bir Kod Yazılır?
+Bu yapının amacı:
+
+Gevşek Bağlılık: CategoriesController, ICategoryService’in bir somut sınıfını değil, arayüzünü (interface) kullanır. Bu da farklı ICategoryService uygulamaları ile kolayca değiştirilebilir olmasını sağlar.
+Test Edilebilirlik: DI ile sağlanan bağımlılık, testlerde kolayca "mock"lanabilir. Bu da birim testleri yazarken sahte nesnelerle (mock objects) bağımlılıkları simüle etmenizi sağlar.
+Kodun Güvenliği: readonly anahtar kelimesi sayesinde _categoryService alanı yalnızca constructor'da atanabilir, bu da yanlışlıkla değiştirilmesini önler.
+Kısacası, bu kod CategoriesController sınıfında bağımlılık enjeksiyonu ve güvenli kod yapısı sağlamak için yazılmıştır.
+
+
+
