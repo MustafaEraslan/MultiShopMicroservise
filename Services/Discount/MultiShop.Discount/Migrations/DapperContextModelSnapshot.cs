@@ -40,7 +40,7 @@ namespace MultiShop.Discount.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ValiDate")
+                    b.Property<DateTime>("ValidDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CouponId");

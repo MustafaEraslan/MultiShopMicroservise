@@ -18,7 +18,7 @@ namespace MultiShop.Discount.Migrations
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rate = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    ValiDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ValidDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
