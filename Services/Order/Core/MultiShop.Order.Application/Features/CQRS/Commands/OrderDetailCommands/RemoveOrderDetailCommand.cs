@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MultiShop.Order.Application.Features.CQRS.Commands.OrderDetailCommands
 {
-    public class RemoveOrderDetailDommand
+    public class RemoveOrderDetailCommand
     {
         public int Id { get; set; }
-        public RemoveOrderDetailDommand(int id)
+        public RemoveOrderDetailCommand(int id)
         {
             Id = id;
                 
