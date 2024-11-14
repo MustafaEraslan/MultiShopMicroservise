@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace MultiShop.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers
 {
-    public class UpdateOrderDetailQueryHandler
+    public class UpdateOrderDetailCommandHandler
     {
         private readonly IRepository<OrderDetail> _repository;
-        public UpdateOrderDetailQueryHandler(IRepository<OrderDetail> repository)
+        public UpdateOrderDetailCommandHandler(IRepository<OrderDetail> repository)
         {
             _repository = repository;
 
         }
-        public async Task Handlers(UpdateOrderDetailCommand command)
+        public async Task Handle(UpdateOrderDetailCommand command)
         {
             //OrderDetailId zaten parametreden geliyor. onu maplemedik
             var values = await _repository.GetByIdAsync(command.OrderDetailId);
