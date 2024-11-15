@@ -115,4 +115,7 @@ Kodun Güvenliği: readonly anahtar kelimesi sayesinde _categoryService alanı y
 Kısacası, bu kod CategoriesController sınıfında bağımlılık enjeksiyonu ve güvenli kod yapısı sağlamak için yazılmıştır.
 
 
+Mediator
+
+uçak kule jet örneğini buraya uygulayabiliriz. Mediator ile kule gibi hiç karışıklık olmadan uçuşlar sağlanabiliyor. Kule= Mediatıor
 
