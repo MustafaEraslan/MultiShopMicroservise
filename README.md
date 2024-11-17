@@ -119,3 +119,20 @@ Mediator
 
 uçak kule jet örneğini buraya uygulayabiliriz. Mediator ile kule gibi hiç karışıklık olmadan uçuşlar sağlanabiliyor. Kule= Mediatıor
 
+
+Docker:
+Docker, uygulamalarınızı hızla derlemenize, test etmenize ve dağıtmanıza imkân tanıyan bir yazılım platformudur. Docker, yazılımları kitaplıklar, sistem araçları, kod ve çalışma zamanı dâhil olmak üzere yazılımların çalışması için gerekli her şeyi içeren container adlı standartlaştırılmış birimler hâlinde paketler. Docker'ı kullanarak her ortama hızla uygulama dağıtıp uygulamaları ölçeklendirebilir ve kodunuzun çalışacağından emin olabilirsiniz.
+
+Docker Volume:
+
+Docker Volumes, Docker Container’larındaki verileri saklamamız veya Container’lar arasında veri paylaşmamız gerektiğinde çok kullanışlıdır. Docker Volumes çok önemli bir kavramdır. Çünkü Docker Container silindiğinde tüm dosya sistemi de yok edilir. Bu gibi durumlarda verileri bir şekilde saklamak istiyorsak, Docker Volumes kullanmamız gerekiyor.
+
+Portainer:
+
+Bizler cmd ve teminal üzerinden çalışmak yerine arayüz içerisinden görmek istiyoruz. Portainer aslında bu işe yarıyor.
+
+docker volume create portainer_data
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+
+
