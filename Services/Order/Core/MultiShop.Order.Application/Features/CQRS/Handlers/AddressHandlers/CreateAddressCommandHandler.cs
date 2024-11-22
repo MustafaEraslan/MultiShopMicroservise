@@ -12,9 +12,9 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
     public class CreateAddressCommandHandler
     {
         private readonly IRepository<Address> _repository;
-        public CreateAddressCommandHandler()
+        public CreateAddressCommandHandler(IRepository<Address> repository)
         {
-            _repository = _repository;
+            _repository = repository;
         }
         public async Task Handle(CreateAddressCommand createAddressCommand)
         {
