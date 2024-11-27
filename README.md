@@ -134,5 +134,54 @@ Bizler cmd ve teminal üzerinden çalışmak yerine arayüz içerisinden görmek
 docker volume create portainer_data
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 
+1. AddTransient
+Yaşam Süresi: Servis her talep edildiğinde yeni bir örnek oluşturulur.
+Kullanım Alanı:
+Hafif ve durumsuz (stateless) servisler.
+Her çağrıda güncel bir örneğe ihtiyaç duyulan servisler.
+Örnek: Yardımcı (utility) sınıflar, küçük fonksiyonel servisler.
+Performans:
+Her çağrıda yeni bir nesne üretildiği için biraz daha fazla kaynak tüketebilir.
+Örnek:
+services.AddTransient<IMyService, MyService>();
+IMyService her talep edildiğinde yeni bir MyService örneği sağlanır.
+2. AddScoped
+Yaşam Süresi: Her HTTP isteği (scope) için bir kez oluşturulur. Aynı istek içinde aynı örnek kullanılır, ancak farklı isteklerde farklı örnekler oluşturulur.
+Kullanım Alanı:
+İstek boyunca durumu koruması gereken servisler.
+İstek yaşam döngüsüne bağlı işlemler (ör. veritabanı bağlamı, birim çalışmaları).
+Performans:
+İstek tabanlı servisler için verimlidir, çünkü her istek için yalnızca bir örnek oluşturulur.
+Örnek:
+services.AddScoped<IMyService, MyService>();
+Tek bir HTTP isteği boyunca MyService bir kez oluşturulur ve tekrar kullanılır.
+3. AddSingleton
+Yaşam Süresi: Uygulama ömrü boyunca bir kez oluşturulur ve aynı örnek tekrar kullanılır.
+Kullanım Alanı:
+Yüksek maliyetli ilk yükleme işlemleri olan servisler (ör. önbellekleme, loglama).
+Uygulama genelinde durum tutması veya global görevler için kullanılan servisler.
+Performans:
+İlk yükleme maliyeti yüksek servislerde verimlidir, çünkü sadece bir örnek kullanılır.
+Bellek yönetimi ve çoklu iş parçacığı (thread safety) konularına dikkat edilmelidir.
+Örnek:
+services.AddSingleton<IMyService, MyService>();
+MyService sadece bir kez oluşturulur ve uygulama boyunca aynı örnek kullanılır.
+Davranış Farklılıkları
+Özellik	AddTransient	AddScoped	AddSingleton
+Yaşam Süresi	Her talep için yeni örnek	Her istek için tek örnek	Uygulama ömrü boyunca tek örnek
+Kaynak Verimliliği	Ek yük oluşturabilir	İstek bazlı dengelidir	Global kullanımda en verimli
+İsteklerde Kullanım	Her çağrıda yeni nesne	İstek içinde aynı nesne	Tüm isteklerde aynı nesne
+Doğru Yaşam Süresini Seçmek
+AddTransient:
+Kısa ömürlü, hafif veya durumsuz servisler için.
+AddScoped:
+HTTP isteklerinin yaşam döngüsüne bağlı servisler için.
+AddSingleton:
+Global, uygulama genelinde paylaşılan servisler için.
+Servisinizin amacı ve yaşam döngüsü gereksinimlerine göre doğru yaşam süresini seçerek kaynak kullanımını optimize edebilir ve uygulamanızın doğru şekilde çalışmasını sağlayabilirsiniz.
+
+
+
+# Identity Server
 
 
