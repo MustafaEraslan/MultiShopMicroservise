@@ -184,4 +184,5 @@ Servisinizin amacı ve yaşam döngüsü gereksinimlerine göre doğru yaşam s�
 
 # Identity Server
 
+![image](https://github.com/user-attachments/assets/68c89da5-7a84-4fc1-85a9-e5bffe1fed58)
 
