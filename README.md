@@ -186,3 +186,14 @@ Servisinizin amacı ve yaşam döngüsü gereksinimlerine göre doğru yaşam s�
 
 ![image](https://github.com/user-attachments/assets/68c89da5-7a84-4fc1-85a9-e5bffe1fed58)
 
+Cargo mikroservisi için katmanlı mimari tercih ettik ve katmanlarımızı alttaki gibi belirledik. 
+
+![image](https://github.com/user-attachments/assets/a5ac4e71-d08e-4b3b-b953-9c162b2ea016)
+
+![image](https://github.com/user-attachments/assets/007dd20d-b617-428f-a928-142fba1b75f8)
+
+
+Repository Design Pattern:
+daha çok N Layer arch. üzerinde kullanılır.
+
+
