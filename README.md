@@ -208,22 +208,22 @@ Bu Yapıdaki Katmanlar
 	•	MultiShop.Cargo.EntityLayer
 	•	Amaç: Veritabanı tablolarına karşılık gelen sınıflar burada tanımlanır. (Örneğin, CargoCompany, CargoCustomer vb.)
 	•	Domain Class veya POCO Class olarak da adlandırılır. Bu sınıflar genellikle sade veri taşıma nesneleridir (DTO değildir).
-	2.	Dto Layer:
+2.	Dto Layer:
 	•	MultiShop.Cargo.DtoLayer
 	•	Amaç: Veri transfer objelerini (Data Transfer Object) içerir. API’de dış dünyaya gösterilecek veriler burada şekillendirilir. (Örneğin, bir CargoDetailDto ile sadece gerekli bilgileri API çıktısı olarak sağlayabilirsiniz.)
 	•	Entity’leri dış dünyaya doğrudan göstermek yerine DTO kullanmak, veri güvenliği ve performans açısından önemlidir.
-	3.	Data Access Layer (DAL):
+3.	Data Access Layer (DAL):
 	•	MultiShop.Cargo.DataAccessLayer
 	•	Amaç: Veritabanı ile etkileşim kuran sınıflar burada tanımlanır.
 	•	Bu katman genellikle şu alt yapılardan oluşur:
 	•	Abstract: Arayüzler (Interfaces) burada tanımlanır. Örneğin, ICargoCompanyDal, IGenericDal gibi.
 	•	Concrete: Generic repository veya Entity Framework implementasyonları buradadır. Örneğin, EfCargoCompanyDal gibi sınıflar.
 	•	Repositories: Genel CRUD işlemleri (Add, Update, Delete, GetById) için GenericRepository tanımlanır ve tüm veri sınıflarına bu yapı üzerinden erişilir.
-	4.	Business Layer:
+4.	Business Layer:
 	•	MultiShop.Cargo.BusinessLayer
 	•	Amaç: İş mantığını (Business Logic) içerir. Veritabanı operasyonlarını kontrol eder, gerekli validasyonları yapar ve uygulamanın temel kurallarını yönetir.
 	•	Data Access katmanını çağırarak veritabanı işlemlerini yürütür, ancak veri işleme, doğrulama veya dönüşüm gibi işlemleri de burada gerçekleştirir.
-	5.	Web API:
+5.	Web API:
 	•	MultiShop.Cargo.WebApi
 	•	Amaç: Uygulamanın dış dünya ile iletişim kurmasını sağlar. HTTP isteklerini karşılar ve yanıt üretir.
 	•	Bu katmanda genellikle Controller sınıfları bulunur. Controller’lar Business Layer üzerinden iş mantığını çalıştırır ve DTO’lar ile veri transferi sağlar.
@@ -233,13 +233,13 @@ Generic Repository Pattern Nedir?
 Generic Repository Pattern, CRUD işlemleri için tekrar eden kodları azaltmak amacıyla kullanılan bir tasarım desenidir. Bu desen, tüm veritabanı işlemleri için tek bir genel sınıf (Generic Class) tanımlayarak bu sınıftan farklı entity türleri için faydalanmayı sağlar.
 
 Design Mantığı
-	1.	Bağımsızlık ve Test Edilebilirlik:
+1.	Bağımsızlık ve Test Edilebilirlik:
 	•	Katmanlı mimari sayesinde her katman birbirinden ayrıdır. Örneğin, Data Access katmanı Entity Framework yerine farklı bir ORM’ye geçmek istediğinizde kolayca değiştirilebilir.
-	2.	Kod Tekrarını Azaltma:
+2.	Kod Tekrarını Azaltma:
 	•	Generic repository ile CRUD işlemleri için kod tekrarı yapmanıza gerek kalmaz.
-	3.	Esneklik:
+3.	Esneklik:
 	•	İleride her entity için farklı özellikler eklemek isterseniz (örneğin, EfCargoCompanyDal içine özel sorgular eklemek), bu yapı buna izin verir.
-	4.	SOLID Prensiplerine Uyum:
+4.	SOLID Prensiplerine Uyum:
 	•	Single Responsibility Principle: Her katman sadece kendi işini yapar (veritabanı işlemleri, iş mantığı, vs.).
 	•	Dependency Inversion Principle: Business Layer, Data Access Layer’ın somut sınıflarına değil, arayüzlerine bağımlıdır. Bu sayede Dependency Injection uygulanabilir.
 
