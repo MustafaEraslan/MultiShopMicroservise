@@ -16,7 +16,7 @@ namespace MultiShop.Cargo.DataAccessLayer.Repositories
         {
             var values = _context.Set<T>().Find(id);
             _context.Set<T>().Remove(values);
-            _context.SaveChanges();
+            _context.SaveChanges(); 
         }
 
         public List<T> GetAll()
