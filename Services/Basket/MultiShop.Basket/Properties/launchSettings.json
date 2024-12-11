@@ -12,9 +12,9 @@
     "MultiShop.Basket": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7073",
+      "applicationUrl": "https://localhost:7074",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
