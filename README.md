@@ -243,3 +243,7 @@ Design Mantığı
 	•	Single Responsibility Principle: Her katman sadece kendi işini yapar (veritabanı işlemleri, iş mantığı, vs.).
 	•	Dependency Inversion Principle: Business Layer, Data Access Layer’ın somut sınıflarına değil, arayüzlerine bağımlıdır. Bu sayede Dependency Injection uygulanabilir.
 
+
+http://localhost:5001/.well-known/openid-configuration
+
+adresi eğer bir json döndürüyorsa identity server düzgün çalışıyor denilebilir.
