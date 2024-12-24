@@ -1,52 +1,62 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MultiShop.Catalog.Dtos.ProductImagesDtos;
+using MultiShop.Catalog.Dtos.ProductImageDtos;
 using MultiShop.Catalog.Services.ProductImageServices;
 
 namespace MultiShop.Catalog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductImagesController : ControllerBase
     {
-        private readonly IProductImageService _productImagesService;
-
-        public ProductImagesController(IProductImageService ProductImagesService)
+        private readonly IProductImageService _productImageService;
+        public ProductImagesController(IProductImageService ProductImageService)
         {
-            _productImagesService = ProductImagesService;
+            _productImageService = ProductImageService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ProductImagesList()
+        public async Task<IActionResult> ProductImageList()
         {
-            var values = await _productImagesService.GetAllProductImageAsync();
+            var values = await _productImageService.GettAllProductImageAsync();
+            return Ok(values);
+        }
+
+        [HttpGet("ProductImagesByProductId/{id}")]
+        public async Task<IActionResult> ProductImagesByProductId(string id)
+        {
+            var values = await _productImageService.GetByProductIdProductImageAsync(id);
             return Ok(values);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductImagesById(string id)
+        public async Task<IActionResult> GetProductImageById(string id)
         {
-            var values = await _productImagesService.GetByIdProductImageAsync(id);
+            var values = await _productImageService.GetByIdProductImageAsync(id);
             return Ok(values);
         }
+
         [HttpPost]
-        public async Task<IActionResult> CreateProductImages(CreateProductImageDto createProductImagesDto)
+        public async Task<IActionResult> CreateProductImage(CreateProductImageDto createProductImageDto)
         {
-            await _productImagesService.CreateProductImageAsync(createProductImagesDto);
-            return Ok("Ürün görselleri Başarılı bir şekilde eklendi.");
+            await _productImageService.CreateProductImageAsync(createProductImageDto);
+            return Ok("Ürün görselleri başarıyla eklendi");
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteProductImages(string id)
+        public async Task<IActionResult> DeleteProductImage(string id)
         {
-            await _productImagesService.DeleteProductImageAsync(id);
-            return Ok();
+            await _productImageService.DeleteProductImageAsync(id);
+            return Ok("Ürün görselleri başarıyla silindi");
         }
+
         [HttpPut]
-        public async Task<IActionResult> UpdateProductImages(UpdateProductImageDto updateProductImagesDto)
+        public async Task<IActionResult> UpdateProductImage(UpdateProductImageDto updateProductImageDto)
         {
-            await _productImagesService.UpdateProductImageAsync(updateProductImagesDto);
-            return Ok("Ürün görselleri başarılı bir şekilde güncellendi.");
+            await _productImageService.UpdateProductImageAsync(updateProductImageDto);
+            return Ok("Ürün görselleri başarıyla güncellendi");
         }
     }
 }

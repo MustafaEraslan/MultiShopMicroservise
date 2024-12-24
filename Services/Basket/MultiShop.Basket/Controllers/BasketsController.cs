@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MultiShop.Basket.Dtos;
 using MultiShop.Basket.LoginServices;
 using MultiShop.Basket.Services;
+using System.Security.Claims;
 
 namespace MultiShop.Basket.Controllers
 {

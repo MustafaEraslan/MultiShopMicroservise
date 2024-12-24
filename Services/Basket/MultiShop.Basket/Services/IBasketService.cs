@@ -1,5 +1,4 @@
 ﻿using MultiShop.Basket.Dtos;
-using StackExchange.Redis;
 
 namespace MultiShop.Basket.Services
 {

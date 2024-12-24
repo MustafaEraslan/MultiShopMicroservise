@@ -13,59 +13,60 @@ namespace MultiShop.Cargo.WebApi.Controllers
     public class CargoDetailsController : ControllerBase
     {
         private readonly ICargoDetailService _CargoDetailService;
-
         public CargoDetailsController(ICargoDetailService CargoDetailService)
         {
             _CargoDetailService = CargoDetailService;
         }
+
         [HttpGet]
         public IActionResult CargoDetailList()
         {
-            var cargoCompanies = _CargoDetailService.TGetAll();
-            return Ok(cargoCompanies);
+            var values = _CargoDetailService.TGetAll();
+            return Ok(values);
         }
+
         [HttpPost]
         public IActionResult CreateCargoDetail(CreateCargoDetailDto createCargoDetailDto)
         {
-            //direkt entity'de parametre geçebilirdik
-            //ancak bunun yerine sadece tek bir prop'un parametre geçmesini sağladık
             CargoDetail CargoDetail = new CargoDetail()
             {
-                Barcode = createCargoDetailDto.Barcode,
-                CargoCompanyId = createCargoDetailDto.CargoCompanyId,
-                ReceiverCustomer = createCargoDetailDto.ReceiverCustomer,
-                SenderCustomer = createCargoDetailDto.SenderCustomer
+               Barcode = createCargoDetailDto.Barcode,
+               CargoCompanyId=createCargoDetailDto.CargoCompanyId,
+               ReceiverCustomer=createCargoDetailDto.ReceiverCustomer,
+               SenderCustomer= createCargoDetailDto.SenderCustomer
             };
             _CargoDetailService.TInsert(CargoDetail);
-
-            return Ok("kargo detayları başarıyla oluşturuldu");
+            return Ok("Kargo Detayları Başarıyla Oluşturuldu");
         }
+
         [HttpDelete]
         public IActionResult RemoveCargoDetail(int id)
         {
             _CargoDetailService.TDelete(id);
-            return Ok("kargo detayları başarıyla silindi");
+            return Ok("Kargo Detayları Başarıyla Silindi");
         }
+
         [HttpGet("{id}")]
         public IActionResult GetCargoDetailById(int id)
         {
             var values = _CargoDetailService.TGetById(id);
             return Ok(values);
         }
+
         [HttpPut]
         public IActionResult UpdateCargoDetail(UpdateCargoDetailDto updateCargoDetailDto)
         {
             CargoDetail CargoDetail = new CargoDetail()
             {
-                //maplemeyi manuel yaptık. automapper da kullanılabilirdi.
-                Barcode = updateCargoDetailDto.Barcode,
-                CargoCompanyId = updateCargoDetailDto.CargoCompanyId,
-                CargoDetailId = updateCargoDetailDto.CargoDetailId,
-                ReceiverCustomer = updateCargoDetailDto.ReceiverCustomer,
-                SenderCustomer = updateCargoDetailDto.SenderCustomer
+               Barcode = updateCargoDetailDto.Barcode,
+               CargoCompanyId= updateCargoDetailDto.CargoCompanyId,
+               CargoDetailId=updateCargoDetailDto.CargoDetailId,
+               ReceiverCustomer=updateCargoDetailDto.ReceiverCustomer,
+               SenderCustomer=updateCargoDetailDto.SenderCustomer
+               
             };
             _CargoDetailService.TUpdate(CargoDetail);
-            return Ok("kargo detayları başarıyla güncellendi");
+            return Ok("Kargo Detayları Başarıyla Güncellendi");
         }
     }
 }

@@ -12,7 +12,6 @@ namespace MultiShop.Cargo.DataAccessLayer.Abstract
         void Update(T entity);
         void Delete(int id);
         T GetById(int id);
-        List<T> GetAll();        
-
+        List<T> GetAll();
     }
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MultiShop.Cargo.BusinessLayer.Concrete
 {
-
     public class CargoOperationManager : ICargoOperationService
     {
         private readonly ICargoOperationDal _cargoOperationDal;
@@ -27,7 +26,7 @@ namespace MultiShop.Cargo.BusinessLayer.Concrete
         }
         public CargoOperation TGetById(int id)
         {
-            return _cargoOperationDal.GetById(id);
+           return _cargoOperationDal.GetById(id);
         }
         public void TInsert(CargoOperation entity)
         {

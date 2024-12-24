@@ -18,38 +18,43 @@ namespace MultiShop.Order.WebApi.Controllers
         private readonly RemoveOrderDetailCommandHandler _removeOrderDetailCommandHandler;
         private readonly UpdateOrderDetailCommandHandler _updateOrderDetailCommandHandler;
 
-        public OrderDetailsController(GetOrderDetailQueryHandler getOrderDetailQueryHandler, GetOrderDetailByIdQueryHandler getOrderDetailByIdQueryHandler, CreateOrderDetailCommandHandler cretaeOrderDetailCommandHandler, RemoveOrderDetailCommandHandler removeOrderDetailCommandHandler, UpdateOrderDetailCommandHandler updateOrderDetailCommandHandler)
+        public OrderDetailsController(GetOrderDetailQueryHandler getOrderDetailQueryHandler, GetOrderDetailByIdQueryHandler getOrderDetailByIdQueryHandler, CreateOrderDetailCommandHandler createOrderDetailCommandHandler, RemoveOrderDetailCommandHandler removeOrderDetailCommandHandler, UpdateOrderDetailCommandHandler updateOrderDetailCommandHandler)
         {
             _getOrderDetailQueryHandler = getOrderDetailQueryHandler;
             _getOrderDetailByIdQueryHandler = getOrderDetailByIdQueryHandler;
-            _createOrderDetailCommandHandler = cretaeOrderDetailCommandHandler;
+            _createOrderDetailCommandHandler = createOrderDetailCommandHandler;
             _removeOrderDetailCommandHandler = removeOrderDetailCommandHandler;
             _updateOrderDetailCommandHandler = updateOrderDetailCommandHandler;
         }
+
         [HttpGet]
         public async Task<IActionResult> OrderDetailList()
         {
-            var result = await _getOrderDetailQueryHandler.Handle();
-            return Ok(result);
+            var values = await _getOrderDetailQueryHandler.Handle();
+            return Ok(values);
         }
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> OrderDetailById(int id)
+        public async Task<IActionResult> GetOrderDetailById(int id)
         {
-            var result = await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIdQuery(id));
-            return Ok(result);
+            var value = await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIdQuery(id));
+            return Ok(value);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateOrderDetail(CreateOrderDetailCommand command)
         {
             await _createOrderDetailCommandHandler.Handle(command);
-            return Ok("Sipariş detayı başaılı eklendi");
+            return Ok("Sipariş detayı başarıyla eklendi");
         }
+
         [HttpDelete]
         public async Task<IActionResult> RemoveOrderDetail(int id)
         {
             await _removeOrderDetailCommandHandler.Handle(new RemoveOrderDetailCommand(id));
             return Ok("Sipariş detayı başarıyla silindi");
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateOrderDetail(UpdateOrderDetailCommand command)
         {

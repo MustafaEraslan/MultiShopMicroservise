@@ -1,4 +1,4 @@
-﻿using MultiShop.Order.Application.Features.CQRS.Result.OrderDetailResults;
+﻿using MultiShop.Order.Application.Features.CQRS.Results.OrderDetailResults;
 using MultiShop.Order.Application.Interfaces;
 using MultiShop.Order.Domain.Entities;
 using System;
@@ -12,6 +12,7 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers
     public class GetOrderDetailQueryHandler
     {
         private readonly IRepository<OrderDetail> _repository;
+
         public GetOrderDetailQueryHandler(IRepository<OrderDetail> repository)
         {
             _repository = repository;
@@ -24,10 +25,10 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers
                 OrderDetailId = x.OrderDetailId,
                 ProductAmount = x.ProductAmount,
                 OrderingId = x.OrderingId,
-                ProdutId = x.ProductId,
+                ProductId = x.ProductId,
                 ProductName = x.ProductName,
                 ProductPrice = x.ProductPrice,
-                ProductTotalPrice = x.ProductTotalPrice,
+                ProductTotalPrice = x.ProductTotalPrice
             }).ToList();
         }
     }

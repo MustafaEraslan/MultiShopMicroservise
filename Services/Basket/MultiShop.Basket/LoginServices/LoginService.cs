@@ -1,9 +1,4 @@
-﻿using MultiShop.Basket.Dtos;
-using MultiShop.Basket.Services;
-using MultiShop.Basket.Settings;
-using System.Text.Json;
-
-namespace MultiShop.Basket.LoginServices
+﻿namespace MultiShop.Basket.LoginServices
 {
     public class LoginService : ILoginService
     {

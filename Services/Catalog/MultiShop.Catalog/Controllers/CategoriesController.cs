@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catalog.Dtos.CategoryDtos;
+using MultiShop.Catalog.Entites;
 using MultiShop.Catalog.Services.CategoryServices;
 
 namespace MultiShop.Catalog.Controllers
@@ -12,7 +13,6 @@ namespace MultiShop.Catalog.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
@@ -21,7 +21,7 @@ namespace MultiShop.Catalog.Controllers
         [HttpGet]
         public async Task<IActionResult> CategoryList()
         {
-            var values = await _categoryService.GetAllCategoryAsync();
+            var values = await _categoryService.GettAllCategoryAsync();
             return Ok(values);
         }
 
@@ -31,24 +31,26 @@ namespace MultiShop.Catalog.Controllers
             var values = await _categoryService.GetByIdCategoryAsync(id);
             return Ok(values);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
         {
             await _categoryService.CreateCategoryAsync(createCategoryDto);
-            return Ok("Kategori Başarılı bir şekilde eklendi.");
+            return Ok("Kategori başarıyla eklendi");
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(string id)
         {
             await _categoryService.DeleteCategoryAsync(id);
-            return Ok();
+            return Ok("Kategori başarıyla silindi");
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
-            return Ok("kategori başarılı bir şekilde güncellendi.");
+            return Ok("Kategori başarıyla güncellendi");
         }
     }
 }

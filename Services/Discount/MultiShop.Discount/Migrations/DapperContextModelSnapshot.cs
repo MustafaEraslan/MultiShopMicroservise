@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MultiShop.Discount.Contex;
+using MultiShop.Discount.Context;
 
 #nullable disable
 
@@ -17,12 +17,12 @@ namespace MultiShop.Discount.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.35")
+                .HasAnnotation("ProductVersion", "6.0.26")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("MultiShop.Discount.Entities.Coupon", b =>
+            modelBuilder.Entity("MultiShop.Discount.Entites.Coupon", b =>
                 {
                     b.Property<int>("CouponId")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace MultiShop.Discount.Migrations
 
                     b.HasKey("CouponId");
 
-                    b.ToTable("Coupones");
+                    b.ToTable("Coupons");
                 });
 #pragma warning restore 612, 618
         }

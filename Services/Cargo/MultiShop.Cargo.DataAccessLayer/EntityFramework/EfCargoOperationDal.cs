@@ -14,8 +14,7 @@ namespace MultiShop.Cargo.DataAccessLayer.EntityFramework
     {
         public EfCargoOperationDal(CargoContext context) : base(context)
         {
-            
-        }
 
+        }
     }
 }

@@ -23,7 +23,7 @@ builder.Services.AddScoped<ICargoDetailDal, EfCargoDetailDal>();
 builder.Services.AddScoped<ICargoDetailService, CargoDetailManager>();
 builder.Services.AddScoped<ICargoOperationDal, EfCargoOperationDal>();
 builder.Services.AddScoped<ICargoOperationService, CargoOperationManager>();
- 
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
-using MultiShop.Catalog.Dtos.ProductImagesDtos;
-using MultiShop.Catalog.Entities;
+using MultiShop.Catalog.Dtos.ProductImageDtos;
+using MultiShop.Catalog.Entites;
 using MultiShop.Catalog.Settings;
 
 namespace MultiShop.Catalog.Services.ProductImageServices
@@ -12,7 +12,6 @@ namespace MultiShop.Catalog.Services.ProductImageServices
         private readonly IMapper _mapper;
         public ProductImageService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
-            //baglantı - databe - tablo ile gidilmesi gerekiyor.
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
             _ProductImageCollection = database.GetCollection<ProductImage>(_databaseSettings.ProductImageCollectionName);
@@ -29,16 +28,22 @@ namespace MultiShop.Catalog.Services.ProductImageServices
             await _ProductImageCollection.DeleteOneAsync(x => x.ProductImageID == id);
         }
 
-        public async Task<List<ResultProductImageDto>> GetAllProductImageAsync()
-        {
-            var values = await _ProductImageCollection.Find(x => true).ToListAsync();
-            return _mapper.Map<List<ResultProductImageDto>>(values);
-        }
-
         public async Task<GetByIdProductImageDto> GetByIdProductImageAsync(string id)
         {
             var values = await _ProductImageCollection.Find<ProductImage>(x => x.ProductImageID == id).FirstOrDefaultAsync();
             return _mapper.Map<GetByIdProductImageDto>(values);
+        }
+
+        public async Task<GetByIdProductImageDto> GetByProductIdProductImageAsync(string id)
+        {
+            var values = await _ProductImageCollection.Find(x => x.ProductId == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetByIdProductImageDto>(values);
+        }
+
+        public async Task<List<ResultProductImageDto>> GettAllProductImageAsync()
+        {
+            var values = await _ProductImageCollection.Find(x => true).ToListAsync();
+            return _mapper.Map<List<ResultProductImageDto>>(values);
         }
 
         public async Task UpdateProductImageAsync(UpdateProductImageDto updateProductImageDto)

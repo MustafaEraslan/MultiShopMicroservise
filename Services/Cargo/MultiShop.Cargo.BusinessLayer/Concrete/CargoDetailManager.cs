@@ -1,6 +1,5 @@
 ﻿using MultiShop.Cargo.BusinessLayer.Abstract;
 using MultiShop.Cargo.DataAccessLayer.Abstract;
-using MultiShop.Cargo.DataAccessLayer.EntityFramework;
 using MultiShop.Cargo.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace MultiShop.Cargo.BusinessLayer.Concrete
         }
         public List<CargoDetail> TGetAll()
         {
-            return _cargoDetailDal.GetAll();
+           return _cargoDetailDal.GetAll();
         }
         public CargoDetail TGetById(int id)
         {

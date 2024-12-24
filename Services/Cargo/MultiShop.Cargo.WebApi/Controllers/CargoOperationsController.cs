@@ -13,22 +13,21 @@ namespace MultiShop.Cargo.WebApi.Controllers
     public class CargoOperationsController : ControllerBase
     {
         private readonly ICargoOperationService _CargoOperationService;
-
         public CargoOperationsController(ICargoOperationService CargoOperationService)
         {
             _CargoOperationService = CargoOperationService;
         }
+
         [HttpGet]
         public IActionResult CargoOperationList()
         {
-            var cargoCompanies = _CargoOperationService.TGetAll();
-            return Ok(cargoCompanies);
+            var values = _CargoOperationService.TGetAll();
+            return Ok(values);
         }
+
         [HttpPost]
         public IActionResult CreateCargoOperation(CreateCargoOperationDto createCargoOperationDto)
         {
-            //direkt entity'de parametre geçebilirdik
-            //ancak bunun yerine sadece tek bir prop'un parametre geçmesini sağladık
             CargoOperation CargoOperation = new CargoOperation()
             {
                 Barcode = createCargoOperationDto.Barcode,
@@ -36,35 +35,35 @@ namespace MultiShop.Cargo.WebApi.Controllers
                 OperationDate = createCargoOperationDto.OperationDate
             };
             _CargoOperationService.TInsert(CargoOperation);
-
-            return Ok("kargo işlemi başarıyla oluşturuldu");
+            return Ok("Kargo İşlemi Başarıyla Oluşturuldu");
         }
+
         [HttpDelete]
         public IActionResult RemoveCargoOperation(int id)
         {
             _CargoOperationService.TDelete(id);
-            return Ok("kargo işlemi başarıyla silindi");
+            return Ok("Kargo İşlemi Başarıyla Silindi");
         }
+
         [HttpGet("{id}")]
         public IActionResult GetCargoOperationById(int id)
         {
             var values = _CargoOperationService.TGetById(id);
             return Ok(values);
         }
+
         [HttpPut]
         public IActionResult UpdateCargoOperation(UpdateCargoOperationDto updateCargoOperationDto)
         {
             CargoOperation CargoOperation = new CargoOperation()
             {
-                //maplemeyi manuel yaptık. automapper da kullanılabilirdi.
                 Barcode = updateCargoOperationDto.Barcode,
+                CargoOperationId = updateCargoOperationDto.CargoOperationId,
                 Description = updateCargoOperationDto.Description,
-                OperationDate = updateCargoOperationDto.OperationDate,
-                CargoOperationId = updateCargoOperationDto.CargoOperationId
-
+                OperationDate = updateCargoOperationDto.OperationDate
             };
             _CargoOperationService.TUpdate(CargoOperation);
-            return Ok("kargo işlemi başarıyla güncellendi");
+            return Ok("Kargo İşlemi Başarıyla Güncellendi");
         }
     }
 }
