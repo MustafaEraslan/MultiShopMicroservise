@@ -247,3 +247,24 @@ Design Mantığı
 http://localhost:5001/.well-known/openid-configuration
 
 adresi eğer bir json döndürüyorsa identity server düzgün çalışıyor denilebilir.
+
+
+#OCELOT	
+
+Upstream clienttan gelen
+downstream server tarafından gelen isteğe nasıl dağıtım yapacağımızı belirtir.
+
+{everything} ile upstream ve downstream ne gelirse dinleyebiliyoruz.
+
+
+
+
+
+
+
+
+
+
+
+
+
